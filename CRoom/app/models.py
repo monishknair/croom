@@ -7,18 +7,29 @@ class ChatRoom(models.Model):
 
     name = models.CharField(max_length=100)
     max = models.IntegerField()
+    access_type = models.IntegerField()
 
     def __unicode__(self):
         return self.name
 
-class Archive(models.Model):
+class Message(models.Model):
 
-    _name = models.CharField(max_length=100)
-    _size = models.CharField(max_length=100)
-    _type = models.CharField(max_length=100)
-    _date_added = models.DateField(auto_now_add=True)
-    _owner = models.CharField(max_length=100)
-    _status = models.CharField(max_length=100)
+    msg = models.CharField(max_length=100)
+    size = models.CharField(max_length=100)
+    msg_type = models.CharField(max_length=100)
+    date_added = models.DateField(auto_now_add=True)
+    owner = models.CharField(max_length=100)
+    status = models.BooleanField(default=True)
 
     def __unicode__(self):
-        return self._name
+        return self._msg
+
+class User(models.Model):
+
+    name = models.CharField(max_length=100)
+    picture = models.FileField(null=True, blank=True)
+    joined_date = models.DateField(auto_now_add=True)
+    crooms = models.name = models.ForeignKey('app.ChatRoom', on_delete=models.CASCADE)
+    active = models.BooleanField(default=True)
+    def __unicode__(self):
+        return self.name
