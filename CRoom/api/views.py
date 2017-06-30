@@ -15,7 +15,7 @@ class Message():
     permission_classes = []
     authentication_classes = []
     def list(self, request):
-        queryset = Message.objects.filter(owner=self.request.user.name, room=self.request.user.chatroom.name)
+        queryset = Message.objects.filter(room__in=self.request.user.usr.crooms.name)
         serializer = MessageSerializer(queryset, Many=True)
         return Response(serializer.data)
 
@@ -23,7 +23,7 @@ class Members():
     permission_classes = []
     authentication_classes = []
     def list(self, request):
-        queryset = Members.objects.filter(room=self.request.user.chatroom.name)
+        queryset = Members.objects.filter(room__in=self.request.user.usr.crooms.name)
         serializer = MessageSerializer(queryset, Many=True)
         return Response(serializer.data)
 
