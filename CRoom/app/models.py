@@ -1,7 +1,7 @@
 from __future__ import unicode_literals
 
 from django.db import models
-
+from django.contrib.auth.models import User
 # Create your models here.
 class ChatRoom(models.Model):
 
@@ -27,6 +27,7 @@ class Message(models.Model):
 
 class User(models.Model):
 
+    user = models.OneToOneField('auth.User', on_delete=models.CASCADE)
     name = models.CharField(max_length=100)
     picture = models.FileField(null=True, blank=True)
     joined_date = models.DateField(auto_now_add=True)
@@ -35,3 +36,4 @@ class User(models.Model):
 
     def __unicode__(self):
         return self.name
+    
