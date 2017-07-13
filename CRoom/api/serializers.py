@@ -14,7 +14,7 @@ class ChatRoomSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class  MessageSerializer(serializers.Serializer):
-    msg = Serializer.CharField(max_length=1000, required=False)
+    msg = serializers.CharField(max_length=1000, required=False)
 
 class MessageDetailsSerializes(serializers.ModelSerializer):
     class Meta:

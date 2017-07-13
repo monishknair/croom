@@ -1,4 +1,4 @@
-from django.conf.urls import patterns, url
+from django.conf.urls import url
 from rest_framework import routers
 from api.views import MembersViewSet, MessageViewSet, ChatRoomViewSet
 
