@@ -6,13 +6,13 @@ from app.models import ChatRoom, Message, Client
 from api.serializers import ChatRoomSerializer, MemberSerializer, MessageSerializer
 
 class ChatRoomViewSet(viewsets.ModelViewSet):
-    permission_classes = []
+    permission_classes = [IsAdmin]
     authentication_classes = []
     queryset = ChatRoom.objects.all()
     serializer_class = ChatRoomSerializer
 
 class MessageViewSet(viewsets.ViewSet):
-    permission_classes = []
+    permission_classes = [IsAdmin]
     authentication_classes = []
     queryset = Message.objects.all()
     def list(self, request):
@@ -21,7 +21,7 @@ class MessageViewSet(viewsets.ViewSet):
         return Response(serializer.data)
 
 class MembersViewSet(viewsets.ViewSet):
-    permission_classes = []
+    permission_classes = [IsAdmin]
     authentication_classes = []
     queryset = Client.objects.all()
     def list(self, request):
