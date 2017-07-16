@@ -6,7 +6,7 @@ from django.shortcuts import get_object_or_404, render
 from django.views import View
 from django.db import transaction
 
-class UserLogin():
+class UserLogin(View):
     def get(self, request):
         return render(request, 'app/Login.html', {'Type': 'Get-Login'})
 
@@ -20,12 +20,12 @@ class UserLogin():
         return render(request, 'app/login.html', {'Type': 'Post-Login', 'form': form})
 
 
-class UserLogout():
+class UserLogout(View):
     def get(self, request):
         logout(request)
         return render(request, 'app/login.html', {'Type': 'Logout'})
 
-class UserReg():
+class UserReg(View):
     def get(self, request):
         return render(request, 'app/reg.html', {'Type': 'get'})
 
@@ -46,7 +46,7 @@ class UserReg():
                 return render(request, 'app/reg.html', {'Type':'post', 'status':'successful'})
         return render(request, 'app/reg.html', {'Type':'get', 'status':'reg_failed', 'errors':form.error})
 
-class Profile():
+class Profile(View):
     def get(self, request):
         data={}
         return render(request, 'app/Profile.html', {'data':data})
@@ -60,7 +60,7 @@ class Profile():
     def delete(self, request):
         return render(request, 'app/Profile.html', {})
 
-class Chatrooms():
+class Chatrooms(View):
     def get(self, request):
         return render(request, 'app/index.html', {})
 
@@ -73,7 +73,7 @@ class Chatrooms():
     def delete(self, request):
         return None
 
-class Members():
+class Members(View):
     def get(self, request):
         return render(request, 'app/index.html', {})
 
@@ -83,7 +83,7 @@ class Members():
     def put(self, request):
         return None
 
-class Messages():
+class Messages(View):
     def get(self, request):
       return render(request, 'app/index.html', {})
 
@@ -95,3 +95,9 @@ class Messages():
 
     def delete(self, request):
       return None
+
+class Working(View):
+    def get(self, request):
+        return(request, 'app/chatroom.html', {'user':user})
+    def post(self, request):
+        return(request, 'app/chatroom.html', {'user':user})

@@ -11,7 +11,7 @@ class ChatRoomViewSet(viewsets.ModelViewSet):
     queryset = ChatRoom.objects.all()
     serializer_class = ChatRoomSerializer
 
-class MessageViewSet():
+class MessageViewSet(viewsets.ViewSet):
     permission_classes = []
     authentication_classes = []
     queryset = Message.objects.all()
@@ -20,11 +20,11 @@ class MessageViewSet():
         serializer = MessageSerializer(queryset, Many=True)
         return Response(serializer.data)
 
-class MembersViewSet():
+class MembersViewSet(viewsets.ViewSet):
     permission_classes = []
     authentication_classes = []
     queryset = Client.objects.all()
     def list(self, request):
-        queryset = Client.objects.filter(room__in=self.request.user.usr.crooms.name)
+        queryset = Client.objects.filter(room__in=self.request.user.usr.crooms)
         serializer = MessageSerializer(queryset, Many=True)
         return Response(serializer.data)
