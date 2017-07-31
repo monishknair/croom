@@ -1,10 +1,11 @@
 from app.forms import UserLoginForm, UserRegForm
-from app.models import Archives, ChatRoom
+from app.models import Archives, ChatRoom, Client, Message
 from django.contrib.auth import authenticate, get_user_model, login, logout
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, render
 from django.views import View
 from django.db import transaction
+from django.contrib.auth.models import User
 
 class UserLogin(View):
     def get(self, request):
@@ -39,8 +40,8 @@ class UserReg(View):
             picture = form.validated_data('picture')
             with transaction.atomic():
                 usr=User.objects.create_user(username=username, password=password)
-                Client.objects.create(name=,
-                                      picture=,
+                Client.objects.create(name=name,
+                                      picture=picture,
                                       user=usr)
 
                 return render(request, 'app/reg.html', {'Type':'post', 'status':'successful'})
@@ -51,13 +52,12 @@ class Profile(View):
         data={}
         return render(request, 'app/Profile.html', {'data':data})
 
-    def post(self, request):
-        return render(request, 'app/Profile.html', {})
-
     def put(self, request):
+        #update profile fields.
         return render(request, 'app/Profile.html', {})
 
     def delete(self, request):
+        #delete user.
         return render(request, 'app/Profile.html', {})
 
 class Chatrooms(View):
@@ -65,36 +65,26 @@ class Chatrooms(View):
         return render(request, 'app/index.html', {})
 
     def post(self, request):
-        return render(request, 'app', {})
-
+        return render(request, 'app/index.html', {})
+    
     def put(self, request):
-        return None
+        return render(request, 'app/index.html', {})
 
     def delete(self, request):
-        return None
+        return render(request, 'app/index.html', {})
 
 class Members(View):
     def get(self, request):
         return render(request, 'app/index.html', {})
 
     def post(self, request):
-      return render(request, 'app', {})
+        return render(request, 'app/members.html',{})
 
     def put(self, request):
-        return None
-
-class Messages(View):
-    def get(self, request):
-      return render(request, 'app/index.html', {})
-
-    def post(self, request):
-        return render(request, 'app', {})
-
-    def put(self, request):
-        return None
+        return render(request, 'app/members.html',{})
 
     def delete(self, request):
-      return None
+        return render(request, 'app/members.html',{})
 
 class Working(View):
     def get(self, request):

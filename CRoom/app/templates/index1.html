@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿{% load staticfiles %}
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8" />
@@ -13,7 +14,8 @@
     <link href="assets/css/bootstrap.css" rel="stylesheet" />
 
 </head>
-<body style="font-family:Verdana">
+<body ng-app="chatapp" style="font-family:Verdana">
+  <div ng-controller="ChatCtrl">
   <div class="container">
 <div class="row " style="padding-top:40px;">
     <h3 class="text-center" >BOOTSTRAP CHAT EXAMPLE </h3>
@@ -276,6 +278,7 @@
         
     </div>
 </div>
+  </div>
   </div>
 </body>
 </html>
